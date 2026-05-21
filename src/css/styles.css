@@ -5,14 +5,19 @@
   |============================
 */
 /* Common styles */
-@import url('./reset.css');
-@import url('./base.css');
-@import url('./container.css');
-@import url('./animations.css');
+@import url('./common/reset.css');
+@import url('./common/base.css');
+@import url('./common/container.css');
+@import url('./common/animations.css');
 
 /* Sections style */
-@import url('./header.css');
-@import url('./vite-promo.css');
-@import url('./badges.css');
-@import url('./back-link.css');
-@import url('./footer.css');
+@import url('./sections/header.css');
+@import url('./sections/hero.css');
+@import url('./sections/popular.css');
+@import url('./sections/sweeties.css');
+@import url('./sections/about-us.css');
+@import url('./sections/feedback.css');
+@import url('./sections/frequent-questions.css');
+@import url('./sections/footer.css');
+@import url('./sections/desserts-modal.css');
+@import url('./sections/order-modal.css');
