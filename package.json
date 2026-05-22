@@ -17,6 +17,7 @@
   "author": "Alexander Repeta <alexander.repeta@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "izitoast": "^1.4.0",
     "star-rating.js": "^4.3.1",
     "swiper": "^12.1.4",
     "tom-select": "^2.6.1",
