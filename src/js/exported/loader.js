@@ -1,7 +1,9 @@
 export function showLoader() {
-  document.querySelector('.loader-backdrop')?.classList.remove('hidden');
+  const loader = document.querySelector('.loader-backdrop');
+  loader.classList.remove('is-hidden');
 }
 
 export function hideLoader() {
-  document.querySelector('.loader-backdrop')?.classList.add('hidden');
+  const loader = document.querySelector('.loader-backdrop');
+  loader.classList.add('is-hidden');
 }
