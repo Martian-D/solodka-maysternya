@@ -1,69 +1,72 @@
 .hero-container {
     min-width: 320px;
     width: 100%;
-    padding: 108.5px 32px;
+    padding: 155.5px 20px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .hero {
     background-image:
         linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-        url("../img/hero-mob-1x.png");
+        url("../img/hero/hero-mob-1x.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .hero-title {
-    font-family: "Aboreto", sans-serif;
-    font-weight: 400;
+    font-family: "Comfortaa", sans-serif;
+    font-weight: 700;
     font-size: 40px;
     line-height: 1.2;
     letter-spacing: -0.01em;
     color: #fff;
     margin-bottom: 24px;
+    text-align: center;
 }
 
 .hero-text {
+    font-family: "Work Sans", sans-serif;
+    font-weight: 400;
     font-size: 18px;
     line-height: 1.5;
+    text-align: center;
     color: #fff;
     margin-bottom: 32px;
 }
 
-.learn-more-btn {
-    min-width: 135px;
+.feedback-btn {
+    min-width: 335px;
     height: 44px;
     padding: 10px 24px;
     border-radius: 100px;
-    background: #6f4e37;
+    background-color: #f19898;
+    cursor: pointer;
+    font-family: "Work Sans", sans-serif;
     font-weight: 500;
     font-size: 16px;
     line-height: 1.5;
-    color: #fff;
-    box-shadow:
-        0 1px 2px rgba(11, 8, 3, 0.05),
-        inset 0 -2px 1px rgba(0, 0, 0, 0.2),
-        inset 0 0 0 1px rgba(11, 8, 3, 0.15),
-        inset 0 2px 1px rgba(255, 255, 255, 0.25),
-        inset 0 32px 24px rgba(255, 255, 255, 0.05);
-    align-self: flex-start;
+    color: #080c0c;
+    text-align: center;
+    align-self: center;
     transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.learn-more-btn:hover,
-.learn-more-btn:focus {
+.feedback-btn:hover,
+.feedback-btn:focus {
     opacity: 0.5;
 }
 
-.learn-more-btn:active {
+.feedback-btn:active {
     opacity: 0.2;
 }
 
-@media screen and (min-resolution: 2dppx),
-screen and (-webkit-min-device-pixel-ratio: 2) {
+@media screen and (max-width: 767px) and (min-resolution: 2dppx),
+screen and (max-width: 767px) and (-webkit-min-device-pixel-ratio: 2) {
     .hero {
         background-image:
             linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
@@ -74,7 +77,7 @@ screen and (-webkit-min-device-pixel-ratio: 2) {
 @media only screen and (min-width: 768px) {
     .hero-container {
         max-width: 768px;
-        padding: 311.5px 32px;
+        padding: 325px 32px;
     }
 
     .hero {
@@ -85,12 +88,12 @@ screen and (-webkit-min-device-pixel-ratio: 2) {
 
     .hero-title,
     .hero-text {
-        max-width: 560px;
+        max-width: 704px;
     }
 }
 
-@media screen and (min-width: 768px) and (min-resolution: 2dppx),
-screen and (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2) {
+@media screen and (min-width: 768px) and (max-width: 1439px) and (min-resolution: 2dppx),
+screen and (min-width: 768px) and (max-width: 1439px) and (-webkit-min-device-pixel-ratio: 2) {
     .hero {
         background-image:
             linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
@@ -101,7 +104,7 @@ screen and (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2) {
 @media only screen and (min-width: 1440px) {
     .hero-container {
         max-width: 1440px;
-        padding: 259px 64px;
+        padding: 306px 63.5px;
     }
 
     .hero {
