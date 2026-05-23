@@ -1,4 +1,4 @@
-.loader {
+.loader-backdrop {
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -10,8 +10,8 @@
   animation: rotate 1s linear infinite;
 }
 
-.loader::before,
-.loader::after {
+.loader-backdrop::before,
+.loader-backdrop::after {
   content: "";
   box-sizing: border-box;
   position: absolute;
@@ -21,7 +21,7 @@
   animation: prixClipFix 2s linear infinite;
 }
 
-.loader::after {
+.loader-backdrop::after {
   transform: rotate3d(90, 90, 0, 180deg);
   border-color: #f19898;
 }
@@ -48,6 +48,6 @@
   }
 }
 
-.loader.is-hidden {
+.loader-backdrop.is-hidden {
   display: none;
 }
