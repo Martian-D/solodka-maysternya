@@ -12,7 +12,7 @@
 
 .loader-backdrop::before,
 .loader-backdrop::after {
-  content: "";
+  content: '';
   box-sizing: border-box;
   position: absolute;
   inset: 0px;
