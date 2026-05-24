@@ -1,10 +1,4 @@
 
-ol {
-  margin: 0;
-  padding: 0;
-}
-
-
 .frequent-questions {
     width: 100%;
     background-color: #f5fdfd;
@@ -15,22 +9,45 @@ ol {
     padding-bottom: 40px;
 }
 
-.frequent-questions-item{
+.ac-trigger{
+    background: none;
+    border: none;
+    padding: 0;
+    text-align: left;
+    width: 100% ;
+    cursor: pointer;
     font-weight: 600;
+    font-size: 18px;
+
+
+}
+
+.frequent-questions-item-ac{
    list-style-position: inside;
    border-bottom: 2px solid #080C0C;
    padding-bottom: 20px;
    padding-top: 20px;
    padding-right: 56px;
+   
 }
 
-.frequent-questions-item:first-child{
+.frequent-questions-item-ac:first-child{
     border-top: 2px solid #080C0C; ;
+}
+
+.ac-text{
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.hidden{
+    display: none;
+    padding-top:20px;
 }
 
 /* -------------Tablet---------- */
 @media only screen and (min-width: 768px){
-.frequent-questions-item{
+.frequent-questions-item-ac{
 padding-bottom: 22.5px;
 padding-top: 22.5px;
 padding-right: 24px;
