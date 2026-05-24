@@ -3,9 +3,7 @@ import "accordion-js/dist/accordion.min.css";
 
 new Accordion(".accordion-container");
 
-const faqConteiner= document.querySelector(".accordion-container", {
-    
-})
+const faqConteiner= document.querySelector(".accordion-container", {})
 
 faqConteiner.addEventListener("click", handlerClick)
 
