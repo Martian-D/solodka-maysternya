@@ -9,6 +9,7 @@
 @import url('./common/base.css');
 @import url('./common/container.css');
 @import url('./common/animations.css');
+@import url('./common/loader.css');
 
 /* Sections style */
 @import url('./sections/header.css');
@@ -20,4 +21,5 @@
 @import url('./sections/frequent-questions.css');
 @import url('./sections/footer.css');
 @import url('./sections/desserts-modal.css');
-@import url('./sections/order-modal.css');
+@import url('./sections/order.css');
+@import url('./sections/modal.css');
