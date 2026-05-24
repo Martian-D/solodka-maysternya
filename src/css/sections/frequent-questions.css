@@ -1,3 +1,51 @@
+
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+
 .frequent-questions {
     width: 100%;
+    background-color: #f5fdfd;
+}
+
+.frequent-questions-title{
+    text-align: center;
+    padding-bottom: 40px;
+}
+
+.frequent-questions-item{
+    font-weight: 600;
+   list-style-position: inside;
+   border-bottom: 2px solid #080C0C;
+   padding-bottom: 20px;
+   padding-top: 20px;
+   padding-right: 56px;
+}
+
+.frequent-questions-item:first-child{
+    border-top: 2px solid #080C0C; ;
+}
+
+/* -------------Tablet---------- */
+@media only screen and (min-width: 768px){
+.frequent-questions-item{
+padding-bottom: 22.5px;
+padding-top: 22.5px;
+padding-right: 24px;
+font-size: 18px;
+}
+}
+
+/* -----------DeskTop---------- */
+@media only screen and (min-width: 1200px){
+    .frequent-questions-title{
+   font-size: 48px;
+   padding-bottom: 80px;
+}
+
+.frequent-questions-container{
+    padding: 0 223.5px;
+}
 }
