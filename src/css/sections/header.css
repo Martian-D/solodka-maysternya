@@ -1,3 +1,352 @@
-.header {
-  padding: 20px 0;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #ffffff;
+  font-family: "Work Sans", sans-serif;
+  color: #080c0c;
+  min-width: 320px;
+}
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+
+/* КОНТЕЙНЕР ТА КНОПКИ (UI КІТ) */
+
+.btn-primary {
+  background-color: #f19898;
+  border: 2px solid #f19898;
+  padding: 8px 20px;
+  border-radius: 100px;
+  font-family: "Work Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #080c0c;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #f19898;
+  border: 2px solid #080c0c;
+  outline: none;
+}
+
+.btn-primary:active {
+  background-color: #f5b6b6;
+  border: 2px solid #080c0c;
+}
+
+
+/* СТИЛІ ДЛЯ МОБІЛЬНИХ (Діють на екранах до 767px включно) */
+
+.header {
+  width: 100%;
+  height: 72px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #f5fdfd;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+  z-index: 200;
+}
+
+.header__container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Строгий мобільний діапазон */
+@media (min-width: 320px) and (max-width: 375px) {
+  .header__container {
+    padding: 0 20px;
+  }
+}
+
+.header__logo {
+  /* width: 158px;
+  height: 72px; */
+  width: 151px;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  z-index: 210;
+}
+
+.header__logo img {
+  width: 100%;
+  height: 100%;
+  /* height: auto;
+  max-height: 100%; */
+  object-fit: contain;
+}
+
+.header__nav {
+  position: fixed;
+  top: 72px;
+  right: -100%;
+  width: 100vw;
+  height: calc(100vh - 72px);
+  /* height: 100vh; */
+  /* height: 345px; */
+  background-color: #f5fdfd;
+  /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03); */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 16px 20px 40px 20px;
+  transition: right 0.3s ease;
+  z-index: 150;
+  /* overflow: hidden; */
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.header__nav.active {
+  right: 0;
+}
+
+.header__menu-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 335px;
+  gap: 8px;
+  margin-top: 0;
+  margin-bottom: 36px;
+  padding: 0;
+  /* margin-bottom: 34px; */
+}
+
+.header__menu-item {
+  width: 100%;
+  height: auto;
+  /* height: 24px; */
+  display: flex;
+  align-items: center;
+}
+
+.header__menu-item--btn {
+  height: auto;
+  margin-top: 24px;
+}
+
+.header__menu-link {
+  display: block;
+  width: 100%;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  /* line-height: 1.5; */
+  color: #080c0c;
+  transition: color 0.2s ease;
+  padding: 12px 0;
+  box-sizing: border-box;
+}
+
+.header__menu-link:hover,
+.header__menu-link:focus {
+  text-decoration: underline;
+  outline: none;
+}
+
+.header__menu-link:active {
+  color: #f19898;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+}
+
+.header__btn.btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 335px;
+  height: 40px;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Кнопка бургер-меню */
+.header__burger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  width: 48px;
+  height: 48px;
+  z-index: 210;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+.header__burger-line {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: #080c0c;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Анімація перетворення на хрестик */
+.header__burger.active .header__burger-line:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.header__burger.active .header__burger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.header__burger.active .header__burger-line:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+
+/* СТИЛІ ДЛЯ ПЛАНШЕТІВ ТА ДЕСКТОПІВ (ВІД 768px) */
+
+  @media (min-width: 768px) {
+    .header {
+      height: 72px;
+    }
+  
+    .header__container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+  
+    .header__logo {
+      width: 156px;
+      height: 100%;
+      display: inline-flex;
+      align-items: center;
+      /* height: 58px; */
+      /* padding: 17px 4px 17px 1px;  */
+      margin-left: 0; 
+      /* box-sizing: border-box; */
+    }
+
+    .header__burger {
+      display: none;
+    }
+
+  /* Повертаємо стандартне горизонтальне відображення навігації */
+    .header__nav {
+      position: static;
+      width: auto;
+      height: auto;
+      background-color: transparent;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0;
+      overflow: visible;
+      gap: 16px;
+      /* flex-grow: 1; */
+      justify-content: flex-end;
+    }
+
+    .header__menu-list {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: auto;
+      max-width: none;
+      gap: 16px;
+      margin-bottom: 0;
+    }
+
+    .header__menu-item {
+      width: auto;
+      /* height: auto; */
+      height: 24px;
+    }
+
+    .header__menu-item--btn {
+      width: auto;
+      margin-top: 0;
+      margin-left: 0;
+    }
+
+    .header__menu-link {
+      display: inline-block;
+      padding: 0;
+      line-height: 24px;
+    }
+
+    .header__btn.btn-primary {
+      width: auto;
+      height: 40px;
+      /* height: auto; */
+      max-width: none;
+      margin: 0;
+      white-space: nowrap;
+      padding: 8px 20px;
+    }
+  }
+
+ /* СТИЛІ ДЛЯ ВЕЛИКИХ ДЕСКТОПІВ (ВІД 1440px) */
+
+  @media (min-width: 1440px) {
+    .header__container {
+      max-width: 1440px;
+      padding: 0 64px;
+    }
+
+    .header__nav {
+      gap: 32px;
+    }
+
+    .header__menu-list {
+      gap: 32px;
+    }
+  }
+
