@@ -85,6 +85,7 @@ function initReviewsSwiper() {
     pagination: {
       el: '.reviews-pagination',
       clickable: true,
+      dynamicBullets: true,
     },
 
     breakpoints: {
@@ -94,7 +95,7 @@ function initReviewsSwiper() {
       },
       1158: {
         slidesPerView: 3,
-        spaceBetween: 24,
+        spaceBetween: 32,
       },
     },
   });
