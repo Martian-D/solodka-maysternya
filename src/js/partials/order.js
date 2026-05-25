@@ -1,8 +1,18 @@
 let currentProduct = null;
+let productsList = [];
+
+/* ===================== */
+/*   PRODUCTS SETUP      */
+/* ===================== */
+
+export function setProducts(products) {
+  productsList = products;
+}
 
 /* ===================== */
 /*   STARS RENDERING     */
 /* ===================== */
+
 function renderStars(rating) {
   let html = '';
 
@@ -73,6 +83,32 @@ export function openModal2() {
   document.body.style.overflow = "hidden";
 }
 
+/* ORDER_BY_ID */
+export function openOrderModalById(id) {
+  const product = productsList.find(p => p.id === id);
+
+  if (!product) return;
+
+  currentProduct = product;
+
+  document.getElementById("orderForm").style.display = "block";
+  document.getElementById("successMsg").style.display = "none";
+
+  document.getElementById("nameInput").value = "";
+  document.getElementById("phoneInput").value = "";
+  document.getElementById("commentInput").value = "";
+
+  document.getElementById("orderSubtitle").textContent =
+    `${product.name} — ${product.price}`;
+
+  document.getElementById("overlay2").classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+/* ===================== */
+/*   CLOSE MODAL 2       */
+/* ===================== */
+
 export function closeModal2() {
   document.getElementById("overlay2").classList.remove("active");
   document.body.style.overflow = "";
@@ -122,7 +158,7 @@ function handleEsc(e) {
 }
 
 /* ===================== */
-/*   INIT FUNCTION       */
+/*   INIT                */
 /* ===================== */
 
 export function initModals() {
