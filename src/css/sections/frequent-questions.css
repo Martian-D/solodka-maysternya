@@ -15,7 +15,7 @@
 border-bottom: 2px solid #080C0C;
 padding-bottom: 20px;
 padding-top: 20px;
-padding-right: 56px;
+
 
 }
 
@@ -54,11 +54,14 @@ padding-right: 56px;
 
 
 
-.ac-text{
-    padding-top:20px;
-    font-size: 16px;
-    font-weight: 400;
+
+
+.ac-icon{
+text-align: center;
+ 
 }
+
+
 
 /* .hidden{
     display: none; 
@@ -66,10 +69,7 @@ padding-right: 56px;
 
 /* -------------Tablet---------- */
 @media only screen and (min-width: 768px){
-.frequent-questions-item-ac{
-padding-bottom: 22.5px;
-padding-top: 22.5px;
-padding-right: 24px;
+.frequent-questions-item{
 font-size: 18px;
 }
 }

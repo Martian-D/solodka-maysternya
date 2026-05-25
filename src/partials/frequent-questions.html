@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    
 </head>
 <body>
     <section class="frequent-questions" id="faq">
@@ -13,7 +14,16 @@
         <div class="accordion-container">
             <div class="frequent-questions-item ac">
                 <p class="ac-header">
-                    <button type="button" class="ac-trigger">1. Які способи оплати ви приймаєте?</button>
+                    <button type="button" class="ac-trigger">
+                        <span>1. Які способи оплати ви приймаєте?</span>
+                    <svg
+            class="ac-icon"
+            width="32"
+            height="32"
+          >
+            <use href="/img/sprite.svg#icon-down"></use>
+          </svg>
+                    </button>
                 </p>
                 <div class="ac-panel ">
                     <p class="ac-text">Ми приймаємо оплату онлайн банківськими картками Visa та Mastercard, через платіжні системи Apple Pay та Google Pay, а також готівкою кур'єру при отриманні замовлення.</p>
@@ -108,5 +118,6 @@
         
     </div>
     </section>
+   
 </body>
 </html>
