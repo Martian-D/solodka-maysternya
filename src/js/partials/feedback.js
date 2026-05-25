@@ -85,6 +85,7 @@ function initReviewsSwiper() {
     pagination: {
       el: '.reviews-pagination',
       clickable: true,
+      dynamicBullets: true,
     },
 
     breakpoints: {
