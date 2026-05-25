@@ -225,7 +225,7 @@
   .swiper {
     overflow: hidden;
     width: 100%;
-    height: 554px;
+    /*height: 554px;*/
   }
 
   .swiper-wrapper {
