@@ -5,3 +5,216 @@
 .order-modal {
     width: 100%;
 }
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  font-family:'Jost',sans-serif;
+  background:#f0ebe4;
+  min-height:100vh;
+  color:#1a1006;
+}
+
+/* HEADER */
+header{
+  text-align:center;
+  padding:48px 20px 32px;
+}
+
+header h1{
+  font-family:'Playfair Display',serif;
+  font-size:38px;
+  margin-bottom:8px;
+}
+
+header p{
+  color:#999;
+  font-size:15px;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:20px;
+  max-width:960px;
+  margin:auto;
+  padding:0 24px 60px;
+}
+
+.card{
+  background:#fff;
+  border-radius:18px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 16px 40px rgba(0,0,0,.12);
+}
+
+.card-img{
+  height:160px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:64px;
+}
+
+.card-body{
+  padding:14px 16px 18px;
+}
+
+.card-name{
+  font-family:'Playfair Display',serif;
+  font-size:17px;
+  margin-bottom:4px;
+}
+
+.card-price{
+  color:#999;
+  margin-bottom:8px;
+}
+
+.card-stars{
+  margin-bottom:10px;
+}
+
+.card-stars span{
+  color:#e07a3a;
+}
+
+.empty{
+  color:#ddd !important;
+}
+
+.card-btn,
+.btn-order,
+.btn-submit{
+  padding:12px 20px;
+  border:none;
+  border-radius:50px;
+  background:#e07a7a;
+  color:white;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.card-btn:hover,
+.btn-order:hover,
+.btn-submit:hover{
+  background:#d06060;
+}
+
+/* OVERLAY */
+.overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.5);
+  z-index:100;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.overlay.active{
+  display:flex;
+}
+
+/* MODAL */
+.modal{
+  background:white;
+  border-radius:22px;
+  width:100%;
+  max-width:340px;
+  position:relative;
+  overflow:hidden;
+}
+
+.modal-close{
+  position:absolute;
+  top:10px;
+  right:10px;
+  width:30px;
+  height:30px;
+  border:none;
+  border-radius:50%;
+  cursor:pointer;
+}
+
+.modal-img{
+  height:210px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:80px;
+}
+
+.modal-body,
+.modal-inner{
+  padding:22px;
+}
+
+.modal-title{
+  font-family:'Playfair Display',serif;
+  font-size:22px;
+}
+
+.modal-price{
+  color:#999;
+  margin:8px 0;
+}
+
+.modal-desc{
+  margin:12px 0;
+  color:#666;
+}
+
+.modal-ingredients{
+  color:#999;
+  margin-bottom:20px;
+}
+
+/* FORM */
+.form-group{
+  margin-bottom:14px;
+}
+
+.form-label{
+  display:block;
+  margin-bottom:5px;
+  color:#888;
+}
+
+.req{
+  color:#e07a7a;
+}
+
+.form-input,
+.form-textarea{
+  width:100%;
+  padding:10px;
+  border:1px solid #ddd;
+  border-radius:10px;
+}
+
+.form-textarea{
+  resize:none;
+  height:90px;
+}
+
+.error{
+  border-color:red;
+}
+
+.success-msg{
+  display:none;
+  text-align:center;
+  padding:20px;
+}
