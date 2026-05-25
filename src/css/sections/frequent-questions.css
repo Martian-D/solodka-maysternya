@@ -37,6 +37,12 @@ padding-top: 20px;
     font-size: 18px !important;
     font-weight: 600 !important;
     padding: 0 !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+
+   
 }
 
 .ac-trigger::after,
@@ -57,8 +63,20 @@ padding-top: 20px;
 
 
 .ac-icon{
-text-align: center;
+width:34px;
+height: 34px ;
+display: flex ;
+justify-content: center ;
+align-items: center;
+padding: 7px 11px;
+flex-shrink: 0;
+
  
+}
+
+.ac-icon svg {
+    width: 17px !important;
+    height: 10px !important;
 }
 
 
