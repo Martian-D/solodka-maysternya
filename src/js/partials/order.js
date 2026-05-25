@@ -1,6 +1,8 @@
 let currentProduct = null;
 
-/* рендер звезд */
+/* ===================== */
+/*   STARS RENDERING     */
+/* ===================== */
 function renderStars(rating) {
   let html = '';
 
@@ -17,16 +19,18 @@ function renderStars(rating) {
   return html;
 }
 
-/* открыть карточку товара */
-function openModal1(product) {
+/* ===================== */
+/*   MODAL 1 (PRODUCT)   */
+/* ===================== */
+
+export function openModal1(product) {
   currentProduct = product;
 
   document.getElementById("modalImg").style.background = product.bg;
   document.getElementById("modalImg").textContent = product.emoji;
   document.getElementById("modalName").textContent = product.name;
   document.getElementById("modalPrice").textContent = product.price;
-  document.getElementById("modalStars").innerHTML =
-    renderStars(product.rating);
+  document.getElementById("modalStars").innerHTML = renderStars(product.rating);
   document.getElementById("modalDesc").textContent = product.desc;
   document.getElementById("modalIngr").innerHTML =
     `<strong>Склад:</strong> ${product.ingredients}`;
@@ -35,21 +39,22 @@ function openModal1(product) {
   document.body.style.overflow = "hidden";
 }
 
-/* закрыть первую модалку */
-function closeModal1() {
+export function closeModal1() {
   document.getElementById("overlay1").classList.remove("active");
   document.body.style.overflow = "";
 }
 
-/* клик по overlay */
-function handleOverlay1Click(e) {
+export function handleOverlay1Click(e) {
   if (e.target.id === "overlay1") {
     closeModal1();
   }
 }
 
-/* открыть форму заказа */
-function openModal2() {
+/* ===================== */
+/*   MODAL 2 (ORDER)     */
+/* ===================== */
+
+export function openModal2() {
   closeModal1();
 
   document.getElementById("orderForm").style.display = "block";
@@ -68,20 +73,22 @@ function openModal2() {
   document.body.style.overflow = "hidden";
 }
 
-/* закрыть форму */
-function closeModal2() {
+export function closeModal2() {
   document.getElementById("overlay2").classList.remove("active");
   document.body.style.overflow = "";
 }
 
-function handleOverlay2Click(e) {
+export function handleOverlay2Click(e) {
   if (e.target.id === "overlay2") {
     closeModal2();
   }
 }
 
-/* отправка формы */
-function submitOrder() {
+/* ===================== */
+/*   FORM SUBMIT         */
+/* ===================== */
+
+export function submitOrder() {
   const name = document.getElementById("nameInput");
   const phone = document.getElementById("phoneInput");
   const comment = document.getElementById("commentInput");
@@ -103,10 +110,21 @@ function submitOrder() {
   document.getElementById("successMsg").style.display = "block";
 }
 
-/* ESC */
-document.addEventListener("keydown", e => {
+/* ===================== */
+/*   ESC HANDLER         */
+/* ===================== */
+
+function handleEsc(e) {
   if (e.key === "Escape") {
     closeModal1();
     closeModal2();
   }
-});
+}
+
+/* ===================== */
+/*   INIT FUNCTION       */
+/* ===================== */
+
+export function initModals() {
+  document.addEventListener("keydown", handleEsc);
+}
