@@ -5,8 +5,8 @@ import iziToast from 'izitoast';
 let currentDessertId = null;
 
 const modalDessert = document.querySelector('.modal-dessert');
-const closeBtn = document.querySelector('.modal-close');
-const orderBtn = document.querySelector('.modal-order-btn');
+const closeBtn = document.querySelector('.dessert-close');
+const orderBtn = document.querySelector('.dessert-order-btn');
 
 export function openModal() {
   modalDessert.classList.remove('is-hidden');
@@ -53,7 +53,7 @@ function onEscapePress(event) {
 }
 
 modalDessert.addEventListener('click', event => {
-  if (event.target.classList.contains('modal-overlay')) {
+  if (event.target.classList.contains('dessert-overlay')) {
     closeModal();
   }
 });
@@ -69,15 +69,17 @@ async function fetchDessertById(id) {
 }
 
 function renderDessertModal(dessert) {
-  document.querySelector('.modal-img').src = dessert.image;
-  document.querySelector('.modal-img').alt = dessert.name;
-  document.querySelector('.modal-title').textContent = dessert.name;
-  document.querySelector('.modal-price').textContent = `${dessert.price} грн`;
-  document.querySelector('.modal-description').textContent =
+  document.querySelector('.dessert-img').src = dessert.image;
+  document.querySelector('.dessert-img').alt = dessert.name;
+  document.querySelector('.dessert-title').textContent = dessert.name;
+  document.querySelector('.dessert-price').textContent = `${dessert.price} грн`;
+  document.querySelector('.dessert-description').textContent =
     dessert.description;
-  document.querySelector('.modal-ingredients').innerHTML =
-    `<span class="modal-ingredients-title">Склад</span>: ${dessert.composition}`;
-  document.querySelector('.modal-rating').innerHTML = renderStars(dessert.rate);
+  document.querySelector('.dessert-ingredients').innerHTML =
+    `<span class="dessert-ingredients-title">Склад</span>: ${dessert.composition}`;
+  document.querySelector('.dessert-rating').innerHTML = renderStars(
+    dessert.rate
+  );
 }
 function renderStars(rate) {
   const normalizedRating = Math.round(Number(rate) * 2) / 2;
