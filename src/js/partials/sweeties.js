@@ -1,4 +1,7 @@
-// ===== SWEETIES: REFS - додає посилання на блок desktop-категорій та select для mobile/tablet
+import TomSelect from 'tom-select';
+import 'tom-select/dist/css/tom-select.css';
+
+// ===== SWEETIES: REFS - додає посилання  desktop-категоріi, select для mobile/tablet
 // ===== Винести до /exported/refs.js
 const refs = {
   sweetiesList: document.querySelector('.sweeties-list'),
@@ -40,11 +43,9 @@ async function fetchCategories() {
   const response = await fetch(
     'https://deserts-store.b.goit.study/api/categories'
   );
-
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
-
   return response.json();
 }
 
@@ -84,7 +85,7 @@ function createSweetiesCardMarkup({
             data-id="${_id}"
             aria-label="Open dessert details"
           >
-            →
+            <use href="/public/img/sprite.svg#icon-arrow_outward"></use>
           </button>
         </div>
       </div>
@@ -141,7 +142,6 @@ function renderCategories(categories) {
   const markup =
     allCategoryMarkup +
     categories.map(category => createCategoryMarkup(category)).join('');
-
   refs.categoriesBox.innerHTML = markup;
 }
 
@@ -157,8 +157,21 @@ function renderCategoryOptions(categories) {
       category => `<option value="${category._id}">${category.name}</option>`
     ),
   ];
-
   refs.categorySelect.innerHTML = options.join('');
+  initTomSelect();
+}
+//===== SWEETIES: Init TomSelect - Ініціалізує TomSelect для mobile/tablet.
+function initTomSelect() {
+  if (!refs.categorySelect) return;
+  if (refs.categorySelect.tomselect) return;
+
+  new TomSelect(refs.categorySelect, {
+    create: false,
+    allowEmptyOption: false,
+    controlInput: null,
+    maxOptions: 20,
+    dropdownClass: 'sweeties-ts-dropdown',
+  });
 }
 
 function getLoadedItemsCount() {
@@ -167,21 +180,16 @@ function getLoadedItemsCount() {
 
 function updateLoadMoreButton() {
   if (!refs.loadMoreBtn) return;
-
   const loadedItems = getLoadedItemsCount();
-
   if (loadedItems >= state.totalItems) {
     refs.loadMoreBtn.style.display = 'none';
     return;
   }
-
   refs.loadMoreBtn.style.display = 'block';
   refs.loadMoreBtn.disabled = false;
 }
-
 function setLoadMoreButtonLoading(isLoading) {
   if (!refs.loadMoreBtn) return;
-
   refs.loadMoreBtn.disabled = isLoading;
   refs.loadMoreBtn.textContent = isLoading
     ? 'Завантаження...'
@@ -195,9 +203,9 @@ function setLoadMoreButtonLoading(isLoading) {
 async function loadCategories() {
   try {
     const categories = await fetchCategories();
-
     renderCategories(categories);
     renderCategoryOptions(categories);
+    refreshTomSelect();
   } catch (error) {
     console.error('Failed to load categories:', error);
   }
@@ -213,7 +221,6 @@ async function loadInitialDesserts() {
     const data = await fetchDesserts(getDessertsQueryParams());
 
     state.totalItems = data.totalItems ?? 0;
-
     renderSweetiesCards(data.desserts ?? []);
     updateLoadMoreButton();
   } catch (error) {
@@ -250,11 +257,9 @@ async function onLoadMoreClick() {
 
 function getDessertsQueryParams() {
   const params = {};
-
   if (state.category !== 'all') {
     params.category = state.category;
   }
-
   return params;
 }
 
@@ -263,9 +268,7 @@ function getDessertsQueryParams() {
 
 async function onCategoryChange(event) {
   const target = event.target;
-
   if (target.type !== 'radio') return;
-
   state.category = target.value;
   await loadInitialDesserts();
 }
@@ -281,15 +284,20 @@ async function onCategorySelectChange(event) {
 // ===== Винести в /exported/handlers.js
 
 function onSweetiesListClick(event) {
+  console.log('click fired');
   const button = event.target.closest('.sweeties-card-btn');
+  console.log('burtton:', button);
   if (!button) return;
 
   const dessertId = button.dataset.id;
+  console.log('dessertId:', dessertId);
 
   if (typeof window.openDessertModal === 'function') {
     window.openDessertModal(dessertId);
+  } else { 
+    console.warn('openDessertModal function is not defined');
   }
-}
+  }
 
 // ===== SWEETIES: Init - Ініціалізує всю секцію sweeties:
 // 1. завантажує категорії;
@@ -301,26 +309,62 @@ function onSweetiesListClick(event) {
 // Залишити в partials/sweeties.js
 
 function initSweeties() {
-
   loadCategories();
-
   loadInitialDesserts();
 
   if (refs.loadMoreBtn) {
     refs.loadMoreBtn.addEventListener('click', onLoadMoreClick);
   }
-
   if (refs.categoriesBox) {
     refs.categoriesBox.addEventListener('change', onCategoryChange);
   }
-
   if (refs.categorySelect) {
     refs.categorySelect.addEventListener('change', onCategorySelectChange);
   }
-
     if (refs.sweetiesList) {
     refs.sweetiesList.addEventListener('click', onSweetiesListClick);
   }
 }
+// ===== MODAL OPEN INIT: Завантажує  дані десерту по id і передає їх у вже готовий modal module
+
+async function fetchDessertById(id) {
+  const response = await fetch(
+    `https://deserts-store.b.goit.study/api/desserts/${id}`
+  );
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  return response.json();
+}
+
+async function openDessertModal(dessertId) {
+  if (!dessertId) {
+    console.warn('Dessert id is missing');
+    return;
+  }
+  try {
+    const dessert = await fetchDessertById(dessertId);
+
+    if (typeof window.openDessertModalWithData === 'function') {
+      window.openDessertModalWithData(dessert);
+      return;
+    }
+    if (
+      typeof window.renderDessertModal === 'function' &&
+      typeof window.showDessertModal === 'function'
+    ) {
+      window.renderDessertModal(dessert);
+      window.showDessertModal();
+      return;
+    }
+
+    console.warn(
+      'Modal API is not connected. Expected window.openDessertModalWithData(dessert) or window.renderDessertModal(dessert) + window.showDessertModal().'
+    );
+  } catch (error) {
+    console.error('Failed to load dessert by id:', error);
+  }
+}
+window.openDessertModal = openDessertModal;
 
 initSweeties();
