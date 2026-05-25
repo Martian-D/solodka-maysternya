@@ -1,0 +1,36 @@
+<section class="sweeties" id="sweets">
+  <div class="container">
+      <div class="sweeties-top">
+      <div class="sweeties-text-content">
+        <h2 class="sweeties-title">Солодощі</h2>
+        <p class="sweeties-text">
+        Спробуйте наші смачні десерти, які вас здивують!
+      </p>
+      </div>
+        <!-- Dynamic content from backend -->
+        <fieldset class="sweeties-categories" data-categories>
+        <legend class="visually-hidden">Категорії десертів</legend>
+      </fieldset>
+
+      <!-- Selector by TomSelect -->
+      <div class="sweeties-select-wrap">
+        <select
+          class="sweeties-select"
+          name="category"
+          aria-label="dessert category selector"
+          data-tom-select
+        >
+          <option value="all" selected>Всі десерти</option>
+        </select>
+      </div>
+</div>
+      <!-- Product cards -->
+      <ul class="sweeties-list" data-sweeties-list></ul>
+
+    <!-- Load more button -->
+      <button class="sweeties-load-more-btn" type="button" data-load-more>
+        Завантажити ще
+      </button>
+    </div>
+  </div>
+</section>
