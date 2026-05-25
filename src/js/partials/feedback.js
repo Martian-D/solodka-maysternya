@@ -94,7 +94,7 @@ function initReviewsSwiper() {
       },
       1158: {
         slidesPerView: 3,
-        spaceBetween: 24,
+        spaceBetween: 32,
       },
     },
   });
