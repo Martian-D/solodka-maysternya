@@ -129,19 +129,22 @@ body {
   margin: 40px auto;
 }
 .sweeties-select {
-  display: block;
   width: 100%;
-  max-width: 335px;
-  min-height: 40px;
-  padding: 8px 12px;
-  border: 2px solid var(--color-neutral-darker);
-  border-radius: 6px;
-  background: var(--opacity-transparent);
-  font: 400 14px / 1.5 var(--font-family);
-  color: var(--color-scheme-1-text);
+  max-width: 100%;
+}
+.sweeties-select.ts-hidden-accessible {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(100%) !important;
+  white-space: nowrap !important;
 }
 /* ===== TOM SELECT: sweeties select ===== */
-
 .ts-wrapper {
   width: 100%;
   max-width: 335px;
@@ -153,9 +156,8 @@ body {
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: 335px;
   min-height: 40px;
-  padding: 8px 12px;
+  padding: 8px 36px 8px 12px;
   border: 2px solid var(--color-neutral-darker);
   border-radius: 6px;
   background: var(--opacity-transparent);
@@ -177,40 +179,51 @@ body {
   border-color: var(--color-wewak-dark);
   box-shadow: 0 0 0 2px var(--color-wewak-light);
 }
+
 .ts-wrapper.dropdown-active .ts-control,
 .ts-wrapper.single.dropdown-active .ts-control {
   background: var(--color-ice-cold-lighter);
   border-color: var(--color-neutral-darker);
 }
+
 .ts-wrapper.single .ts-control .item,
 .ts-wrapper .ts-control .item,
 .ts-wrapper.single .ts-control input {
   font: 400 14px / 1.5 var(--font-family);
   color: var(--color-scheme-1-text);
 }
+
 .ts-wrapper.single .ts-control input::placeholder {
   color: var(--color-neutral);
 }
 
 .ts-wrapper.single .ts-control::after {
-  border-color: var(--color-neutral-dark) transparent transparent transparent;
-  border-width: 5px 4px 0 4px;
-  margin-top: -2px;
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  width: 8px;
+  height: 8px;
+  margin-top: -5px;
+  border-right: 1.5px solid var(--color-neutral-dark);
+  border-bottom: 1.5px solid var(--color-neutral-dark);
+  transform: rotate(45deg);
+  transform-origin: center;
+  transition: transform 250ms ease;
+  pointer-events: none;
 }
 
 .ts-wrapper.single.dropdown-active .ts-control::after {
-  border-color: transparent transparent var(--color-neutral-dark) transparent;
-  border-width: 0 4px 5px 4px;
-  margin-top: -2px;
+  transform: rotate(-135deg);
 }
 
 .ts-dropdown,
 .ts-dropdown.sweeties-ts-dropdown {
-  margin-top: 4px;
+  margin-top: 6px;
   border: 1px solid var(--color-neutral-darker);
   border-radius: 6px;
   background: var(--color-ice-cold-lighter);
-  box-shadow: none;
+  box-shadow: 0 4px 12px var(--opacity-neutral-darkest-10);
   overflow: hidden;
   font: 400 14px / 1.5 var(--font-family);
   color: var(--color-scheme-1-text);
@@ -218,47 +231,54 @@ body {
 
 .ts-dropdown .ts-dropdown-content {
   max-height: 260px;
-  padding: 0;
+  padding: 8px 0;
   scrollbar-width: thin;
-  scrollbar-color: var(--color-wewak-dark) transparent;
+  scrollbar-color: var(--color-wewak-dark) var(--color-wewak-light);
 }
-
+.ts-dropdown .ts-dropdown-content {
+  position: relative;
+  overflow-y: auto;
+}
 .ts-dropdown .ts-dropdown-content::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 .ts-dropdown .ts-dropdown-content::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--color-wewak-light);
+  border-radius: 8px;
 }
 
 .ts-dropdown .ts-dropdown-content::-webkit-scrollbar-thumb {
   background-color: var(--color-wewak-dark);
-  border-radius: 999px;
+  border-radius: 8px;
 }
 
 .ts-dropdown .option,
 .ts-dropdown .create {
-  padding: 8px 12px;
+  padding: 12px;
   font: 400 14px / 1.5 var(--font-family);
   color: var(--color-scheme-1-text);
   background: transparent;
   text-decoration: none;
+  text-underline-offset: 2px;
   transition:
     background-color 250ms ease,
     color 250ms ease,
     text-decoration-color 250ms ease;
 }
+
 .ts-dropdown .option:hover,
+.ts-dropdown .option.active,
 .ts-dropdown .active {
-  background-color: var(--color-wewak-lightest);
+  background: var(--color-wewak-lightest);
   color: var(--color-neutral-darkest);
+  text-decoration: underline;
 }
 
 .ts-dropdown .selected {
-  background-color: var(--color-wewak-light);
+  background: var(--color-wewak-lightest);
   color: var(--color-neutral-darkest);
   text-decoration: underline;
-  text-underline-offset: 2px;
   font-weight: 500;
 }
 
@@ -356,8 +376,8 @@ body {
 }
 
 .sweeties-card-btn svg {
-  width: 13px;
-  height: 13px;
+  width: 24px;
+  height: 24px;
   flex-shrink: 0;
   fill: var(--color-neutral-darkest);
 }

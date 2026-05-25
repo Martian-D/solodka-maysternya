@@ -79,14 +79,11 @@ function createSweetiesCardMarkup({
         <div class="sweeties-card-bottom">
           <p class="sweeties-card-price">${price} грн</p>
 
-          <button
-            class="sweeties-card-btn"
-            type="button"
-            data-id="${_id}"
-            aria-label="Open dessert details"
-          >
-            <use href="/public/img/sprite.svg#icon-arrow_outward"></use>
-          </button>
+          <button class="sweeties-card-btn" type="button" data-id="${_id}" aria-label="Open dessert details">
+<svg id="icon-arrow_outward" width="32" height="32" viewBox="0 0 32 32" x="432" y="0">
+<path d="M21.72 10.4l-12.795 12.804c-0.202 0.209-0.484 0.339-0.797 0.339-0.001 0-0.002 0-0.003 0h0c-0.001 0-0.002 0-0.004 0-0.311 0-0.591-0.133-0.786-0.346l-0.001-0.001c-0.213-0.201-0.345-0.485-0.347-0.8v-0q0-0.452 0.347-0.8l12.795-12.793h-11.267c-0.008 0-0.017 0-0.027 0-0.308 0-0.587-0.126-0.788-0.33l-0-0c-0.203-0.201-0.328-0.479-0.328-0.787 0-0.009 0-0.019 0-0.028l-0 0.001q0-0.483 0.328-0.805c0.202-0.2 0.481-0.324 0.788-0.324 0.010 0 0.020 0 0.029 0l-0.001-0h14q0.48 0 0.808 0.328c0.202 0.199 0.327 0.475 0.327 0.78 0 0.010-0 0.020-0 0.030l0-0.001v14q0 0.48-0.328 0.808c-0.201 0.203-0.479 0.328-0.787 0.328-0.009 0-0.019-0-0.028-0l0.001 0c-0.010 0-0.021 0-0.032 0-0.306 0-0.583-0.126-0.781-0.328l-0-0c-0.2-0.2-0.324-0.477-0.324-0.783 0-0.009 0-0.018 0-0.027l-0 0.001z"></path>
+</svg>
+</button>
         </div>
       </div>
     </li>
@@ -158,19 +155,23 @@ function renderCategoryOptions(categories) {
     ),
   ];
   refs.categorySelect.innerHTML = options.join('');
+  
+  if (refs.categorySelect.tomselect) {
+    refs.categorySelect.tomselect.destroy();
+  }
+
   initTomSelect();
 }
 //===== SWEETIES: Init TomSelect - Ініціалізує TomSelect для mobile/tablet.
 function initTomSelect() {
   if (!refs.categorySelect) return;
-  if (refs.categorySelect.tomselect) return;
 
   new TomSelect(refs.categorySelect, {
     create: false,
     allowEmptyOption: false,
     controlInput: null,
     maxOptions: 20,
-    dropdownClass: 'sweeties-ts-dropdown',
+    dropdownClass: 'ts-dropdown sweeties-ts-dropdown',
   });
 }
 
@@ -202,10 +203,10 @@ function setLoadMoreButtonLoading(isLoading) {
 
 async function loadCategories() {
   try {
-    const categories = await fetchCategories();
+    const categories = await
+    fetchCategories();
     renderCategories(categories);
     renderCategoryOptions(categories);
-    refreshTomSelect();
   } catch (error) {
     console.error('Failed to load categories:', error);
   }
