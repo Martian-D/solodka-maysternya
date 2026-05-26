@@ -6,22 +6,22 @@ import 'swiper/css/pagination';
 
 let swiper = null;
 
-const mediaQuery = window.matchMedia("(min-width: 768px)");
-mediaQuery.addEventListener("change", handleSwiper);
+const mediaQuery = window.matchMedia('(min-width: 768px)');
+mediaQuery.addEventListener('change', handleSwiper);
 
 function handleSwiper(event) {
-  if(event.matches) {
-    if(!swiper) {
-      swiper = new Swiper('.swiper', {
+  if (event.matches) {
+    if (!swiper) {
+      swiper = new Swiper('.about-us-swiper', {
         modules: [Navigation, Pagination, Autoplay],
         slidesPerView: 2,
         spaceBetween: 24,
         navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
+          nextEl: '.swiper-container .swiper-button-next',
+          prevEl: '.swiper-container .swiper-button-prev',
         },
         pagination: {
-          el: '.swiper-pagination',
+          el: '.about-us-swiper .swiper-pagination',
           dynamicBullets: true,
           clickable: true,
         },
@@ -32,7 +32,7 @@ function handleSwiper(event) {
       });
     }
   } else {
-    if(swiper) {
+    if (swiper) {
       swiper.destroy(true, true);
       swiper = null;
     }
@@ -40,5 +40,3 @@ function handleSwiper(event) {
 }
 
 handleSwiper(mediaQuery);
-
-

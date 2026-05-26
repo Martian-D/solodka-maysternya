@@ -41,24 +41,24 @@
   margin: 0 auto;
 }
 
-.swiper {
-  display: none;
-}
-
-.swiper-wrapper {
-  display: none;
+.about-us-swiper {
+  width: 100%;
 }
 
 .swiper-slide {
-  display: none;
+  width: 100%;
 }
 
-.btn-wrapper {
+.swiper-pagination,
+.swiper-button-next,
+.swiper-button-prev {
   display: none;
 }
-
 
 .img-item {
+  display: block;
+  width: 100%;
+  height: auto;
   border-radius: 16px;
   object-fit: cover;
 }
@@ -92,10 +92,10 @@
     text-align: center;
   }
 
-  .swiper {
+  .about-us-swiper {
     width: 100%;
     display: block;
-    flex-direction: row;
+    overflow: hidden;
   }
 
   .wrapper {
@@ -109,6 +109,12 @@
   .swiper-wrapper {
     width: 704px;
     margin-bottom: 48px;
+  }
+
+  .swiper-pagination,
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: flex;
   }
 
   .swiper-container {
@@ -128,6 +134,10 @@
   .swiper-button-prev {
     width: 48px;
     height: 48px;
+  }
+
+  .swiper-pagination {
+    display: block;
   }
 
   .swiper-button-prev {
@@ -206,10 +216,6 @@
 /* Styles for Desktop devices */
 @media only screen and (min-width: 1440px) {
 
-  .btn-wrapper {
-    display: block;
-  }
-
   .about-content {
     display: block;
     width: 768px;
@@ -220,7 +226,7 @@
     width: 768px;
   }
 
-  .swiper {
+  .about-us-swiper {
     overflow: hidden;
     width: 100%;
     /*height: 554px;*/
