@@ -8,6 +8,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 72px;
 }
 
 body {
@@ -48,6 +49,7 @@ img {
 /* КОНТЕЙНЕР ТА КНОПКИ (UI КІТ) */
 
 .btn-primary {
+  box-sizing: border-box;
   background-color: #f19898;
   border: 2px solid #f19898;
   padding: 8px 20px;
@@ -87,13 +89,18 @@ img {
   background-color: #f5fdfd;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
   z-index: 200;
+  padding: 0 !important;
 }
 
 .header__container {
+  box-sizing: border-box;
   position: relative;
   width: 100%;
   height: 100%;
-  padding: 0 20px;
+  max-width: 335px; 
+  margin: 0 auto;   
+  padding: 0;     
+  /* padding: 0 20px; */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -135,9 +142,13 @@ img {
   /* height: 345px; */
   background-color: #f5fdfd;
   /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03); */
-  display: flex;
+  /* display: flex; */
+  display: block; 
   flex-direction: column;
-  justify-content: flex-start;
+  /* justify-content: center;  
+  align-items: center;   */
+  /* justify-content: flex-start; */
+  justify-content: space-between;
   align-items: flex-start;
   padding: 16px 20px 40px 20px;
   transition: right 0.3s ease;
@@ -155,11 +166,14 @@ img {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  /* align-items: center;        */
+  text-align: center;
   width: 100%;
   max-width: 335px;
   gap: 8px;
-  margin-top: 0;
-  margin-bottom: 36px;
+  margin: 0 auto 36px auto;
+  /* margin-top: 0;
+  margin-bottom: 36px; */
   padding: 0;
   /* margin-bottom: 34px; */
 }
@@ -189,6 +203,7 @@ img {
   transition: color 0.2s ease;
   padding: 12px 0;
   box-sizing: border-box;
+  text-align: left;
 }
 
 .header__menu-link:hover,
@@ -210,7 +225,8 @@ img {
   width: 100%;
   max-width: 335px;
   height: 40px;
-  margin: 0;
+  /* margin: 0; */
+  margin: 0 auto; 
   box-sizing: border-box;
 }
 
@@ -226,7 +242,7 @@ img {
   z-index: 210;
   position: absolute;
   top: 12px;
-  right: 12px;
+  right: 0px;
 }
 
 .header__burger-line {
@@ -265,8 +281,10 @@ img {
     }
   
     .header__logo {
-      width: 156px;
-      height: 100%;
+      width: 151px;
+      height: 65px;
+      /* width: 156px; */
+      /* height: 100%; */
       display: inline-flex;
       align-items: center;
       /* height: 58px; */
@@ -274,6 +292,12 @@ img {
       margin-left: 0; 
       /* box-sizing: border-box; */
     }
+
+    .header__logo-img {
+    width: 100%;
+    height: 100%;       
+    object-fit: contain;
+  }
 
     .header__burger {
       display: none;
