@@ -1,5 +1,6 @@
 import TomSelect from 'tom-select';
 import 'tom-select/dist/css/tom-select.css';
+import { openDessertModal } from './desserts-modal.js';
 
 // ===== SWEETIES: REFS - додає посилання  desktop-категоріi, select для mobile/tablet
 // ===== Винести до /exported/refs.js
@@ -97,7 +98,6 @@ function renderSweetiesCards(items, append = false) {
     refs.sweetiesList.insertAdjacentHTML('beforeend', markup);
     return;
   }
-
   refs.sweetiesList.innerHTML = markup;
 }
 
@@ -157,9 +157,9 @@ function renderCategoryOptions(categories) {
   if (refs.categorySelect.tomselect) {
     refs.categorySelect.tomselect.destroy();
   }
-
   initTomSelect();
 }
+
 //===== SWEETIES: Init TomSelect - Ініціалізує TomSelect для mobile/tablet.
 function initTomSelect() {
   if (!refs.categorySelect) return;
@@ -208,8 +208,7 @@ async function loadCategories() {
   } catch (error) {
     console.error('Failed to load categories:', error);
   }
-  console.log();
-  }
+}
 
 async function loadInitialDesserts() {
   try {
@@ -283,20 +282,16 @@ async function onCategorySelectChange(event) {
 // ===== Винести в /exported/handlers.js
 
 function onSweetiesListClick(event) {
-  console.log('click fired');
   const button = event.target.closest('.sweeties-card-btn');
-  console.log('burtton:', button);
   if (!button) return;
 
   const dessertId = button.dataset.id;
-  console.log('dessertId:', dessertId);
-
-  if (typeof window.openDessertModal === 'function') {
-    window.openDessertModal(dessertId);
-  } else { 
-    console.warn('openDessertModal function is not defined');
+  if (!dessertId) {
+    console.warn('Dessert id is missing on button');
+    return;
   }
-  }
+  openDessertModal(dessertId);
+}
 
 // ===== SWEETIES: Init - Ініціалізує всю секцію sweeties:
 // 1. завантажує категорії;
@@ -324,46 +319,5 @@ function initSweeties() {
     refs.sweetiesList.addEventListener('click', onSweetiesListClick);
   }
 }
-// ===== MODAL OPEN INIT: Завантажує  дані десерту по id і передає їх у вже готовий modal module
-
-async function fetchDessertById(id) {
-  const response = await fetch(
-    `https://deserts-store.b.goit.study/api/desserts/${id}`
-  );
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
-  return response.json();
-}
-
-async function openDessertModal(dessertId) {
-  if (!dessertId) {
-    console.warn('Dessert id is missing');
-    return;
-  }
-  try {
-    const dessert = await fetchDessertById(dessertId);
-
-    if (typeof window.openDessertModalWithData === 'function') {
-      window.openDessertModalWithData(dessert);
-      return;
-    }
-    if (
-      typeof window.renderDessertModal === 'function' &&
-      typeof window.showDessertModal === 'function'
-    ) {
-      window.renderDessertModal(dessert);
-      window.showDessertModal();
-      return;
-    }
-
-    console.warn(
-      'Modal API is not connected. Expected window.openDessertModalWithData(dessert) or window.renderDessertModal(dessert) + window.showDessertModal().'
-    );
-  } catch (error) {
-    console.error('Failed to load dessert by id:', error);
-  }
-}
-window.openDessertModal = openDessertModal;
 
 initSweeties();
