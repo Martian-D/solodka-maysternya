@@ -9,3 +9,4 @@ import './js/partials/footer.js';
 import './js/partials/order.js';
 import './js/partials/modal.js';
 import './js/partials/desserts-modal.js';
+import 'izitoast/dist/css/iziToast.min.css';
