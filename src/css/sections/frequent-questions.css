@@ -1,3 +1,106 @@
+
 .frequent-questions {
     width: 100%;
+    background-color: #f5fdfd;
+}
+
+.frequent-questions-title{
+    text-align: center;
+    padding-bottom: 40px;
+}
+
+
+
+.frequent-questions-item{
+border-bottom: 2px solid #080C0C;
+padding-bottom: 20px;
+padding-top: 20px;
+
+
+}
+
+.ac:first-child{
+    border-top: 2px solid #080C0C !important;
+}
+
+.ac
+{
+    border:none !important;
+    background-color: inherit !important;
+    margin-bottom: 0 !important;
+    border-bottom: 2px solid #080C0C !important;
+    
+}
+
+.ac-trigger {
+    font:inherit !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    padding: 0 !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+
+
+}
+
+.ac-trigger::after,
+.ac-trigger::before{
+    display: none !important;
+}
+
+.ac .ac-trigger:focus{
+    color: inherit !important;
+    
+}
+
+.ac-text{
+    font:inherit !important;
+    font-size: 16px !important;
+    font-weight: 400 !important; 
+    padding: 0 !important; 
+    padding-top: 20px !important;
+}
+
+
+
+
+
+.ac-icon{
+width:34px;
+height: 34px ;
+display: flex ;
+justify-content: center ;
+align-items: center;
+padding: 7px 11px;
+flex-shrink: 0;
+transition: transform 0.3s ease;
+
+
+}
+
+.onMove {
+    transform: rotate(180deg);
+
+
+}
+
+/* -------------Tablet---------- */
+@media only screen and (min-width: 768px){
+.frequent-questions-item{
+font-size: 18px;
+}
+}
+
+/* -----------DeskTop---------- */
+@media only screen and (min-width: 1200px){
+    .frequent-questions-title{
+    font-size: 48px;
+    padding-bottom: 80px;
+}
+
+.frequent-questions-container{
+    padding: 0 223.5px;
+}
 }

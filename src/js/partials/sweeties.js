@@ -1,5 +1,6 @@
 import TomSelect from 'tom-select';
 import 'tom-select/dist/css/tom-select.css';
+import { openDessertModal } from './desserts-modal.js';
 
 // ===== SWEETIES: REFS - додає посилання  desktop-категоріi, select для mobile/tablet
 // ===== Винести до /exported/refs.js
@@ -80,7 +81,9 @@ function createSweetiesCardMarkup({
           <p class="sweeties-card-price">${price} грн</p>
 
           <button class="sweeties-card-btn" type="button" data-id="${_id}" aria-label="Open dessert details">
-          <svg width="24" height="24"><use href="/img/sprite.svg#icon-arrow_outward"></use></svg>
+          <svg id="icon-arrow_outward" width="32" height="32" viewBox="0 0 32 32" x="432" y="0">
+<path d="M21.72 10.4l-12.795 12.804c-0.202 0.209-0.484 0.339-0.797 0.339-0.001 0-0.002 0-0.003 0h0c-0.001 0-0.002 0-0.004 0-0.311 0-0.591-0.133-0.786-0.346l-0.001-0.001c-0.213-0.201-0.345-0.485-0.347-0.8v-0q0-0.452 0.347-0.8l12.795-12.793h-11.267c-0.008 0-0.017 0-0.027 0-0.308 0-0.587-0.126-0.788-0.33l-0-0c-0.203-0.201-0.328-0.479-0.328-0.787 0-0.009 0-0.019 0-0.028l-0 0.001q0-0.483 0.328-0.805c0.202-0.2 0.481-0.324 0.788-0.324 0.010 0 0.020 0 0.029 0l-0.001-0h14q0.48 0 0.808 0.328c0.202 0.199 0.327 0.475 0.327 0.78 0 0.010-0 0.020-0 0.030l0-0.001v14q0 0.48-0.328 0.808c-0.201 0.203-0.479 0.328-0.787 0.328-0.009 0-0.019-0-0.028-0l0.001 0c-0.010 0-0.021 0-0.032 0-0.306 0-0.583-0.126-0.781-0.328l-0-0c-0.2-0.2-0.324-0.477-0.324-0.783 0-0.009 0-0.018 0-0.027l-0 0.001z"></path>
+</svg>
           </button>
         </div>
       </div>
@@ -97,7 +100,6 @@ function renderSweetiesCards(items, append = false) {
     refs.sweetiesList.insertAdjacentHTML('beforeend', markup);
     return;
   }
-
   refs.sweetiesList.innerHTML = markup;
 }
 
@@ -157,9 +159,9 @@ function renderCategoryOptions(categories) {
   if (refs.categorySelect.tomselect) {
     refs.categorySelect.tomselect.destroy();
   }
-
   initTomSelect();
 }
+
 //===== SWEETIES: Init TomSelect - Ініціалізує TomSelect для mobile/tablet.
 function initTomSelect() {
   if (!refs.categorySelect) return;
@@ -208,8 +210,7 @@ async function loadCategories() {
   } catch (error) {
     console.error('Failed to load categories:', error);
   }
-  console.log();
-  }
+}
 
 async function loadInitialDesserts() {
   try {
@@ -283,20 +284,16 @@ async function onCategorySelectChange(event) {
 // ===== Винести в /exported/handlers.js
 
 function onSweetiesListClick(event) {
-  console.log('click fired');
   const button = event.target.closest('.sweeties-card-btn');
-  console.log('burtton:', button);
   if (!button) return;
 
   const dessertId = button.dataset.id;
-  console.log('dessertId:', dessertId);
-
-  if (typeof window.openDessertModal === 'function') {
-    window.openDessertModal(dessertId);
-  } else { 
-    console.warn('openDessertModal function is not defined');
+  if (!dessertId) {
+    console.warn('Dessert id is missing on button');
+    return;
   }
-  }
+  openDessertModal(dessertId);
+}
 
 // ===== SWEETIES: Init - Ініціалізує всю секцію sweeties:
 // 1. завантажує категорії;
@@ -324,46 +321,5 @@ function initSweeties() {
     refs.sweetiesList.addEventListener('click', onSweetiesListClick);
   }
 }
-// ===== MODAL OPEN INIT: Завантажує  дані десерту по id і передає їх у вже готовий modal module
-
-async function fetchDessertById(id) {
-  const response = await fetch(
-    `https://deserts-store.b.goit.study/api/desserts/${id}`
-  );
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
-  return response.json();
-}
-
-async function openDessertModal(dessertId) {
-  if (!dessertId) {
-    console.warn('Dessert id is missing');
-    return;
-  }
-  try {
-    const dessert = await fetchDessertById(dessertId);
-
-    if (typeof window.openDessertModalWithData === 'function') {
-      window.openDessertModalWithData(dessert);
-      return;
-    }
-    if (
-      typeof window.renderDessertModal === 'function' &&
-      typeof window.showDessertModal === 'function'
-    ) {
-      window.renderDessertModal(dessert);
-      window.showDessertModal();
-      return;
-    }
-
-    console.warn(
-      'Modal API is not connected. Expected window.openDessertModalWithData(dessert) or window.renderDessertModal(dessert) + window.showDessertModal().'
-    );
-  } catch (error) {
-    console.error('Failed to load dessert by id:', error);
-  }
-}
-window.openDessertModal = openDessertModal;
 
 initSweeties();
