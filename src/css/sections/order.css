@@ -1,9 +1,49 @@
 .order-modal-overlay {
-    display: contents;
+  overflow-y: hidden;
+  overscroll-behavior: contain;
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(0, 0, 0, 0.4);
+
+  opacity: 1;
+  visibility: visible;
+
+  transition: opacity 250ms ease, visibility 250ms ease;
+
+  z-index: 1000;
 }
 
+
+
 .order-modal {
-    width: 100%;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+
+  width: 100%;
+  max-width: 335px;
+  max-height: 95%;
+
+  padding: 64px 20px;
+
+  border-radius: 16px;
+
+  background-color: #f2f6f6;
+
+  box-sizing: border-box;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  /* overflow: auto;
+  scrollbar-gutter: stable; */
 }
 *, *::before, *::after {
   box-sizing: border-box;
