@@ -13,8 +13,8 @@
 
 .frequent-questions-item{
 border-bottom: 2px solid #080C0C;
-padding-bottom: 20px;
-padding-top: 20px;
+
+
 
 
 }
@@ -33,15 +33,15 @@ padding-top: 20px;
 }
 
 .ac-trigger {
-    font:inherit !important;
+    font-family:'Work Sans', sans-serif !important;
     font-size: 18px !important;
     font-weight: 600 !important;
-    padding: 0 !important;
+    padding: 20px 0 !important;
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
     width: 100% !important;
-
+    
 
 }
 
@@ -56,11 +56,11 @@ padding-top: 20px;
 }
 
 .ac-text{
-    font:inherit !important;
+    font-family:'Work Sans', sans-serif !important;
     font-size: 16px !important;
     font-weight: 400 !important; 
     padding: 0 !important; 
-    padding-top: 20px !important;
+    padding-bottom: 20px !important;
 }
 
 
@@ -68,17 +68,28 @@ padding-top: 20px;
 
 
 .ac-icon{
-width:34px;
-height: 34px ;
+width: 20px !important;
+height: 13px !important;
 display: flex ;
 justify-content: center ;
 align-items: center;
-padding: 7px 11px;
 flex-shrink: 0;
 transition: transform 0.3s ease;
-
-
 }
+
+.ac-trigger:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.ac-trigger:active, 
+.ac-trigger:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+
+
 
 .onMove {
     transform: rotate(180deg);
