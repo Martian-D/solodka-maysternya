@@ -99,7 +99,6 @@
   }
 
   .wrapper {
-    display: none;
     width: unset;
     justify-content: unset;
     flex-wrap: unset;
@@ -109,7 +108,6 @@
 
   .swiper-wrapper {
     width: 704px;
-    height: 252px;
     margin-bottom: 48px;
   }
 
