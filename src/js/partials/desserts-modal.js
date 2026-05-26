@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { BASE_URL } from '../exported/constants.js';
 import { hideLoader, showLoader } from '../exported/loader.js';
+import { openOrderModal } from './order.js';
 import iziToast from 'izitoast';
-let currentDessertId = null;
+let currentDessert = null;
 
 const modalDessert = document.querySelector('.modal-dessert');
 const closeBtn = document.querySelector('.dessert-close');
@@ -21,10 +22,11 @@ export function closeModal() {
 }
 
 export async function openDessertModal(id) {
-  currentDessertId = id;
+  currentDessert = id;
   try {
     showLoader();
     const dessert = await fetchDessertById(id);
+    currentDessert = dessert;
     renderDessertModal(dessert);
     openModal();
   } catch (error) {
@@ -60,7 +62,7 @@ modalDessert.addEventListener('click', event => {
 
 orderBtn.addEventListener('click', () => {
   closeModal();
-  // openOrderModal(currentDessertId);
+  openOrderModal(currentDessert);
 });
 
 async function fetchDessertById(id) {
