@@ -150,6 +150,11 @@ body {
   max-width: 335px;
   font: 400 14px / 1.5 var(--font-family);
 }
+/* Remove default browser focus outline */
+.ts-wrapper .ts-control:focus,
+.ts-wrapper .ts-control:focus-visible {
+  outline: 2px solid transparent;
+}
 
 .ts-wrapper.single .ts-control,
 .ts-wrapper .ts-control {
@@ -177,7 +182,6 @@ body {
 
 .ts-wrapper.focus .ts-control {
   border-color: var(--color-wewak-dark);
-  box-shadow: 0 0 0 2px var(--color-wewak-light);
 }
 
 .ts-wrapper.dropdown-active .ts-control,
@@ -210,7 +214,19 @@ body {
   transform: rotate(45deg);
   transform-origin: center;
   transition: transform 250ms ease;
+  border-color: 250ms ease;
   pointer-events: none;
+}
+.ts-wrapper .ts-control:hover::after,
+.ts-wrapper.focus .ts-control::after {
+  border-right-color: var(--color-wewak-dark);
+  border-bottom-color: var(--color-wewak-dark);
+}
+
+.ts-wrapper.single.dropdown-active .ts-control::after {
+  border-right-color: var(--color-neutral-darkest);
+  border-bottom-color: var(--color-neutral-darkest);
+  transform: rotate(-135deg);
 }
 
 .ts-wrapper.single.dropdown-active .ts-control::after {
@@ -225,20 +241,19 @@ body {
   background: var(--color-ice-cold-lighter);
   box-shadow: 0 4px 12px var(--opacity-neutral-darkest-10);
   overflow: hidden;
-  font: 400 14px / 1.5 var(--font-family);
+  font: 500 16px / 1.5 var(--font-family);
   color: var(--color-scheme-1-text);
 }
 
 .ts-dropdown .ts-dropdown-content {
+  position: relative;
+  overflow-y: auto;
   max-height: 260px;
   padding: 8px 0;
   scrollbar-width: thin;
-  scrollbar-color: var(--color-wewak-dark) var(--color-wewak-light);
+  scrollbar-color: var(--color-wewak-darkest) var(--color-wewak-light);
 }
-.ts-dropdown .ts-dropdown-content {
-  position: relative;
-  overflow-y: auto;
-}
+
 .ts-dropdown .ts-dropdown-content::-webkit-scrollbar {
   width: 8px;
 }
@@ -249,15 +264,15 @@ body {
 }
 
 .ts-dropdown .ts-dropdown-content::-webkit-scrollbar-thumb {
-  background-color: var(--color-wewak-dark);
+  background-color: var(--color-wewak-darkest);
   border-radius: 8px;
 }
 
 .ts-dropdown .option,
 .ts-dropdown .create {
   padding: 12px;
-  font: 400 14px / 1.5 var(--font-family);
-  color: var(--color-scheme-1-text);
+  font: 500 16px / 1.5 var(--font-family);
+  color: var(--color-neutral-darkest);
   background: transparent;
   text-decoration: none;
   text-underline-offset: 2px;
@@ -268,18 +283,24 @@ body {
 }
 
 .ts-dropdown .option:hover,
-.ts-dropdown .option.active,
-.ts-dropdown .active {
-  background: var(--color-wewak-lightest);
+.ts-dropdown .option:focus,
+.ts-dropdown .option.focus {
+  background: transparent;
   color: var(--color-neutral-darkest);
   text-decoration: underline;
 }
 
-.ts-dropdown .selected {
-  background: var(--color-wewak-lightest);
+.ts-dropdown .option.active,
+.ts-dropdown .active,
+.ts-dropdown .selected,
+.ts-dropdown .option.selected {
+  background: transparent;
   color: var(--color-neutral-darkest);
   text-decoration: underline;
   font-weight: 500;
+}
+.ts-dropdown .ts-dropdown-content:hover .option.selected {
+  text-decoration: none;
 }
 
 .ts-wrapper.disabled .ts-control,
@@ -295,7 +316,13 @@ body {
   color: var(--color-neutral);
   text-decoration: none;
 }
-
+.sweeties-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  margin: 40px auto;
+}
 .sweeties-card {
   display: flex;
   flex-direction: column;
@@ -607,7 +634,6 @@ body {
     row-gap: 40px;
     width: 100%;
     max-width: 1312px;
-    margin: 40px auto;
   }
   .sweeties-load-more-btn {
     width: 198px;

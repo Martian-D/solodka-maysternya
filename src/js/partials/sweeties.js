@@ -166,12 +166,18 @@ function renderCategoryOptions(categories) {
 function initTomSelect() {
   if (!refs.categorySelect) return;
 
-  new TomSelect(refs.categorySelect, {
+  const tomSelect = new TomSelect(refs.categorySelect, {
     create: false,
     allowEmptyOption: false,
     controlInput: null,
     maxOptions: 20,
     dropdownClass: 'ts-dropdown sweeties-ts-dropdown',
+  });
+
+  tomSelect.on('change', () => {
+    setTimeout(() => {
+      tomSelect.blur();
+    }, 0);
   });
 }
 
