@@ -1,166 +1,93 @@
-let currentProduct = null;
-let productsList = [];
+import axios from 'axios';
+import { BASE_URL } from '../exported/constants.js';
+import iziToast from 'izitoast';
 
-/* ===================== */
-/*   PRODUCTS SETUP      */
-/* ===================== */
+let currentDessertId = null;
 
-export function setProducts(products) {
-  productsList = products;
+const overlay2 = document.getElementById('overlay2');
+const closeContactBtn = document.getElementById('closeContactBtn');
+const submitOrderBtn = document.getElementById('submitOrderBtn');
+
+export function openOrderModal(dessert) {
+  currentDessertId = dessert._id;
+
+  document.getElementById('nameInput').value = '';
+  document.getElementById('phoneInput').value = '';
+  document.getElementById('commentInput').value = '';
+
+  document.getElementById('orderForm').style.display = 'block';
+  document.getElementById('successMsg').style.display = 'none';
+
+  overlay2.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  document.addEventListener('keydown', onEscapePress);
 }
 
-/* ===================== */
-/*   STARS RENDERING     */
-/* ===================== */
-
-function renderStars(rating) {
-  let html = '';
-
-  for (let i = 1; i <= 5; i++) {
-    if (i <= Math.floor(rating)) {
-      html += '<span>★</span>';
-    } else if (i - 0.5 <= rating) {
-      html += '<span style="opacity:.5">★</span>';
-    } else {
-      html += '<span class="empty">★</span>';
-    }
-  }
-
-  return html;
+export function closeOrderModal() {
+  overlay2.classList.remove('active');
+  document.body.style.overflow = '';
+  document.removeEventListener('keydown', onEscapePress);
 }
 
-/* ===================== */
-/*   MODAL 1 (PRODUCT)   */
-/* ===================== */
-
-export function openModal1(product) {
-  currentProduct = product;
-
-  document.getElementById("modalImg").style.background = product.bg;
-  document.getElementById("modalImg").textContent = product.emoji;
-  document.getElementById("modalName").textContent = product.name;
-  document.getElementById("modalPrice").textContent = product.price;
-  document.getElementById("modalStars").innerHTML = renderStars(product.rating);
-  document.getElementById("modalDesc").textContent = product.desc;
-  document.getElementById("modalIngr").innerHTML =
-    `<strong>Склад:</strong> ${product.ingredients}`;
-
-  document.getElementById("overlay1").classList.add("active");
-  document.body.style.overflow = "hidden";
+function onEscapePress(e) {
+  if (e.key === 'Escape') closeOrderModal();
 }
 
-export function closeModal1() {
-  document.getElementById("overlay1").classList.remove("active");
-  document.body.style.overflow = "";
-}
+overlay2.addEventListener('click', e => {
+  if (e.target === overlay2) closeOrderModal();
+});
 
-export function handleOverlay1Click(e) {
-  if (e.target.id === "overlay1") {
-    closeModal1();
-  }
-}
+closeContactBtn.addEventListener('click', closeOrderModal);
+submitOrderBtn.addEventListener('click', submitOrder);
 
-/* ===================== */
-/*   MODAL 2 (ORDER)     */
-/* ===================== */
-
-export function openModal2() {
-  closeModal1();
-
-  document.getElementById("orderForm").style.display = "block";
-  document.getElementById("successMsg").style.display = "none";
-
-  document.getElementById("nameInput").value = "";
-  document.getElementById("phoneInput").value = "";
-  document.getElementById("commentInput").value = "";
-
-  if (currentProduct) {
-    document.getElementById("orderSubtitle").textContent =
-      `${currentProduct.name} — ${currentProduct.price}`;
-  }
-
-  document.getElementById("overlay2").classList.add("active");
-  document.body.style.overflow = "hidden";
-}
-
-/* ORDER_BY_ID */
-export function openOrderModalById(id) {
-  const product = productsList.find(p => p.id === id);
-
-  if (!product) return;
-
-  currentProduct = product;
-
-  document.getElementById("orderForm").style.display = "block";
-  document.getElementById("successMsg").style.display = "none";
-
-  document.getElementById("nameInput").value = "";
-  document.getElementById("phoneInput").value = "";
-  document.getElementById("commentInput").value = "";
-
-  document.getElementById("orderSubtitle").textContent =
-    `${product.name} — ${product.price}`;
-
-  document.getElementById("overlay2").classList.add("active");
-  document.body.style.overflow = "hidden";
-}
-
-/* ===================== */
-/*   CLOSE MODAL 2       */
-/* ===================== */
-
-export function closeModal2() {
-  document.getElementById("overlay2").classList.remove("active");
-  document.body.style.overflow = "";
-}
-
-export function handleOverlay2Click(e) {
-  if (e.target.id === "overlay2") {
-    closeModal2();
-  }
-}
-
-/* ===================== */
-/*   FORM SUBMIT         */
-/* ===================== */
-
-export function submitOrder() {
-  const name = document.getElementById("nameInput");
-  const phone = document.getElementById("phoneInput");
-  const comment = document.getElementById("commentInput");
+async function submitOrder() {
+  const nameInput = document.getElementById('nameInput');
+  const phoneInput = document.getElementById('phoneInput');
+  const commentInput = document.getElementById('commentInput');
 
   let valid = true;
-
-  [name, phone, comment].forEach(el => {
+  [nameInput, phoneInput, commentInput].forEach(el => {
     if (!el.value.trim()) {
-      el.classList.add("error");
+      el.classList.add('error');
       valid = false;
     } else {
-      el.classList.remove("error");
+      el.classList.remove('error');
     }
   });
 
-  if (!valid) return;
-
-  document.getElementById("orderForm").style.display = "none";
-  document.getElementById("successMsg").style.display = "block";
-}
-
-/* ===================== */
-/*   ESC HANDLER         */
-/* ===================== */
-
-function handleEsc(e) {
-  if (e.key === "Escape") {
-    closeModal1();
-    closeModal2();
+  if (!valid) {
+    iziToast.warning({
+      title: 'Увага!',
+      message: 'Будь ласка, заповніть всі поля форми.',
+      position: 'topRight',
+      timeout: 3000,
+    });
+    return;
   }
-}
 
-/* ===================== */
-/*   INIT                */
-/* ===================== */
+  try {
+    await axios.post(`${BASE_URL}/orders`, {
+      name: nameInput.value.trim(),
+      phone: phoneInput.value.trim(),
+      comment: commentInput.value.trim(),
+      dessertId: currentDessertId,
+    });
 
-export function initModals() {
-  document.addEventListener("keydown", handleEsc);
+    iziToast.success({
+      title: 'Успішно!',
+      message:
+        'Ваше замовлення прийнято. Ми зателефонуємо вам найближчим часом.',
+      position: 'topRight',
+      timeout: 4000,
+    });
+
+    closeOrderModal();
+  } catch (error) {
+    iziToast.error({
+      title: 'Помилка!',
+      message: 'Не вдалося відправити замовлення. Спробуйте пізніше.',
+      position: 'topRight',
+      timeout: 4000,
+    });
+  }
 }

@@ -1,220 +1,183 @@
-.order-modal-overlay {
-    display: contents;
+/* Оверлей — прихований за замовчуванням */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
 }
 
-.order-modal {
-    width: 100%;
+.overlay.active {
+  display: flex;
 }
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
+
+/* Модальне вікно */
+.modal {
+  background: #eef4f3; /* як на макеті */
+  border-radius: 18px;
+  padding: 1.8rem 1.4rem 1.4rem;
+  width: 100%;
+  max-width: 320px;
+  position: relative;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Кнопка закриття */
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  background: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #111;
+  line-height: 1;
   padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
-body{
-  font-family:'Jost',sans-serif;
-  background:#f0ebe4;
-  min-height:100vh;
-  color:#1a1006;
+.modal-close:focus,
+.modal-close:active,
+.modal-close:hover {
+  outline: none;
+  border: none;
+  box-shadow: none;
+  background: transparent;
 }
 
-/* HEADER */
-header{
-  text-align:center;
-  padding:48px 20px 32px;
+/* Заголовок */
+.modal-title {
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #080c0c;
+  text-align: center; 
+  margin: 0 auto 1.4rem;
+  max-width: 295px; 
 }
 
-header h1{
-  font-family:'Playfair Display',serif;
-  font-size:38px;
-  margin-bottom:8px;
+/* Група поля */
+.form-group {
+  margin-bottom: 0.75rem;
 }
 
-header p{
-  color:#999;
-  font-size:15px;
+/* Лейбл */
+.form-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #222;
+  font-family: 'Jost', sans-serif;
 }
 
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-  gap:20px;
-  max-width:960px;
-  margin:auto;
-  padding:0 24px 60px;
-}
-
-.card{
-  background:#fff;
-  border-radius:18px;
-  overflow:hidden;
-  cursor:pointer;
-  transition:.25s;
-}
-
-.card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 16px 40px rgba(0,0,0,.12);
-}
-
-.card-img{
-  height:160px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:64px;
-}
-
-.card-body{
-  padding:14px 16px 18px;
-}
-
-.card-name{
-  font-family:'Playfair Display',serif;
-  font-size:17px;
-  margin-bottom:4px;
-}
-
-.card-price{
-  color:#999;
-  margin-bottom:8px;
-}
-
-.card-stars{
-  margin-bottom:10px;
-}
-
-.card-stars span{
-  color:#e07a3a;
-}
-
-.empty{
-  color:#ddd !important;
-}
-
-.card-btn,
-.btn-order,
-.btn-submit{
-  padding:12px 20px;
-  border:none;
-  border-radius:50px;
-  background:#e07a7a;
-  color:white;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.card-btn:hover,
-.btn-order:hover,
-.btn-submit:hover{
-  background:#d06060;
-}
-
-/* OVERLAY */
-.overlay{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.5);
-  z-index:100;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-}
-
-.overlay.active{
-  display:flex;
-}
-
-/* MODAL */
-.modal{
-  background:white;
-  border-radius:22px;
-  width:100%;
-  max-width:340px;
-  position:relative;
-  overflow:hidden;
-}
-
-.modal-close{
-  position:absolute;
-  top:10px;
-  right:10px;
-  width:30px;
-  height:30px;
-  border:none;
-  border-radius:50%;
-  cursor:pointer;
-}
-
-.modal-img{
-  height:210px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:80px;
-}
-
-.modal-body,
-.modal-inner{
-  padding:22px;
-}
-
-.modal-title{
-  font-family:'Playfair Display',serif;
-  font-size:22px;
-}
-
-.modal-price{
-  color:#999;
-  margin:8px 0;
-}
-
-.modal-desc{
-  margin:12px 0;
-  color:#666;
-}
-
-.modal-ingredients{
-  color:#999;
-  margin-bottom:20px;
-}
-
-/* FORM */
-.form-group{
-  margin-bottom:14px;
-}
-
-.form-label{
-  display:block;
-  margin-bottom:5px;
-  color:#888;
-}
-
-.req{
-  color:#e07a7a;
-}
-
+/* Інпути */
 .form-input,
-.form-textarea{
-  width:100%;
-  padding:10px;
-  border:1px solid #ddd;
-  border-radius:10px;
+.form-textarea {
+   width: 100%;
+
+  margin-top: 8px;
+  padding: 12px;
+
+  box-sizing: border-box;
+
+  border: 2px solid #080c0c;
+  border-radius: 12px;
+
+  background-color: transparent;
+
+  outline: transparent;
+
+  transition: border-color 250ms ease;
 }
 
-.form-textarea{
-  resize:none;
-  height:90px;
+/* Placeholder */
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: #8a8a8a;
+  letter-spacing: 0.3px;
 }
 
-.error{
-  border-color:red;
+/* Поле телефону */
+.phone-input::placeholder {
+  letter-spacing: 1px;
 }
 
-.success-msg{
-  display:none;
-  text-align:center;
-  padding:20px;
+/* Focus */
+.form-input:focus,
+.form-textarea:focus {
+  border-color: #111;
+}
+
+/* Textarea */
+.form-textarea {
+  min-height: 140px;
+  resize: none;
+
+}
+
+/* Кнопка */
+.btn-submit {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  background: #ea918f;
+  border: none;
+  border-radius: 999px;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 500; /* менш жирний */
+  color: #111;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  text-align: center;
+  transition: background 0.2s ease;
+}
+
+.btn-submit:hover {
+  background: #df7f7d;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .modal {
+    max-width: 704px; 
+    padding: 64px 32px;
+  }
+
+  .form-textarea {
+    height: 180px; 
+  }
+
+  .btn-submit {
+    width: 344px; 
+    margin: 0 auto; 
+  }
+}
+
+
+@media only screen and (min-width: 1440px) {
+  .modal {
+    max-width: 768px; /* Розширення під великі монітори */
+  }
+
+  .modal-title {
+    font-size: 48px; 
+  }
+
+  .btn-submit {
+    width: 196px;
+    height: 44px;
+    padding: 0; 
+    line-height: 44px;
+  }
 }
