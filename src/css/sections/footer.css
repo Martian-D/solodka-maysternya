@@ -130,9 +130,14 @@ hr {
 }
 
 @media only screen and (min-width: 1440px) {
-  .footer-nav-link,
-  .footer-social-link {
-    padding: 32px 0;
+  .footer-nav-link {
+    /* .footer-social-link { */
+    padding: 12px 0;
+    font-size: 14px;
+  }
+  .footer-social-icon {
+    width: 24px;
+    height: 24px;
   }
 }
 
