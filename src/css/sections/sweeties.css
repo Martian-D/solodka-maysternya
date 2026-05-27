@@ -420,6 +420,18 @@ body {
   font: 500 16px / 1.5 var(--font-family);
   color: var(--color-neutral-darkest);
 }
+.sweeties-load-more-btn:hover,
+.sweeties-load-more-btn:focus {
+  background-color: #f19898;
+  border: 2px solid #080c0c;
+  outline: none;
+}
+
+.btn-primary:active {
+  background-color: #f5b6b6;
+  border: 2px solid #080c0c;
+}
+
 .sweeties-card-btn,
 .sweeties-load-more-btn,
 .sweeties-select {
