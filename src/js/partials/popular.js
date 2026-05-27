@@ -2,7 +2,6 @@ import Swiper from 'swiper';
 import { Navigation, Pagination } from 'swiper/modules';
 import { openDessertModal } from './desserts-modal.js'; // 1. Імпортуємо функцію модалки
 
-// Імпорт стилів Swiper прямо у JS
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -65,7 +64,6 @@ function initPopularSwiper() {
   });
 }
 
-// 3. Функція відстеження кліку по списку карток (делегування подій)
 function onPopularListClick(event) {
   const button = event.target.closest('.sweeties-card-btn');
   if (!button) return;
@@ -75,7 +73,7 @@ function onPopularListClick(event) {
     console.warn('Dessert id is missing on button');
     return;
   }
-  openDessertModal(dessertId); // Відкриваємо модалку
+  openDessertModal(dessertId);
 }
 
 async function renderPopularSection() {
@@ -85,7 +83,6 @@ async function renderPopularSection() {
   if (popularList) {
     popularList.innerHTML = products.map(createCardMarkup).join('');
     
-    // 4. Додаємо слухач кліку на контейнер списку
     popularList.addEventListener('click', onPopularListClick);
     
     initPopularSwiper();
