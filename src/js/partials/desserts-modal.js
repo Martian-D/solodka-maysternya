@@ -13,16 +13,34 @@ export function openModal() {
   modalDessert.classList.remove('is-hidden');
   document.body.style.overflow = 'hidden';
   document.addEventListener('keydown', onEscapePress);
+  closeBtn.addEventListener('click', closeModal);
+  modalDessert.addEventListener('click', onBackdropClick);
+  orderBtn.addEventListener('click', onOrderBtnClick);
 }
 
 export function closeModal() {
   modalDessert.classList.add('is-hidden');
   document.body.style.overflow = '';
   document.removeEventListener('keydown', onEscapePress);
+  closeBtn.removeEventListener('click', closeModal);
+  modalDessert.removeEventListener('click', onBackdropClick);
+  orderBtn.removeEventListener('click', onOrderBtnClick);
+}
+
+function onOrderBtnClick() {
+  closeModal();
+  openOrderModal(currentDessert);
 }
 
 export async function openDessertModal(id) {
-  currentDessert = id;
+  document.querySelector('.dessert-img').src = '';
+  document.querySelector('.dessert-img').alt = '';
+  document.querySelector('.dessert-title').textContent = '';
+  document.querySelector('.dessert-price').textContent = '';
+  document.querySelector('.dessert-description').textContent = '';
+  document.querySelector('.dessert-ingredients').innerHTML = '';
+  document.querySelector('.dessert-rating').innerHTML = '';
+  currentDessert = null;
   try {
     showLoader();
     const dessert = await fetchDessertById(id);
@@ -46,24 +64,17 @@ export async function openDessertModal(id) {
     hideLoader();
   }
 }
-closeBtn.addEventListener('click', closeModal);
 
 function onEscapePress(event) {
   if (event.key === 'Escape') {
     closeModal();
   }
 }
-
-modalDessert.addEventListener('click', event => {
+function onBackdropClick(event) {
   if (event.target.classList.contains('dessert-overlay')) {
     closeModal();
   }
-});
-
-orderBtn.addEventListener('click', () => {
-  closeModal();
-  openOrderModal(currentDessert);
-});
+}
 
 async function fetchDessertById(id) {
   const response = await axios.get(`${BASE_URL}/desserts/${id}`);
