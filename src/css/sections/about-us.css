@@ -1,5 +1,5 @@
 .about-us {
-    width: 100%;
+  width: 100%;
 }
 
 .section-about {
@@ -8,8 +8,7 @@
 
 .about-content {
   width: 335px;
-  padding-bottom: 40px;
-  margin: 0 auto;
+  margin: 0 auto 40px;
 
 }
 
@@ -28,7 +27,7 @@
   line-height: 1.5;
   margin: 0 auto;
   width: 335px;
-  padding: 0 6px;  /* added padding */
+  padding: 0 10px; /* added padding */
 }
 
 .wrapper {
@@ -68,7 +67,6 @@
 }
 
 
-
 /* Styles for Tablet devices */
 @media only screen and (min-width: 768px) {
 
@@ -80,7 +78,6 @@
 
   .about-content {
     width: 704px;
-    margin: 0 auto;
   }
 
   .about-text {
@@ -88,7 +85,7 @@
     font-weight: 400;
     line-height: 1.5;
     width: 704px;
-    padding: 0 18px;  /* added padding */
+    padding: 0 18px; /* added padding */
     text-align: center;
   }
 
@@ -219,7 +216,6 @@
   .about-content {
     display: block;
     width: 768px;
-    margin: 0 auto;
   }
 
   .about-text {
@@ -229,12 +225,10 @@
   .about-us-swiper {
     overflow: hidden;
     width: 100%;
-    /*height: 554px;*/
   }
 
   .swiper-wrapper {
     width: 1312px;
-    /*height: 478px;*/
   }
 
   .swiper-slide {
