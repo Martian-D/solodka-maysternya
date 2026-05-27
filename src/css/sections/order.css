@@ -54,14 +54,15 @@
 
 /* Заголовок */
 .modal-title {
-  font-family: 'Jost', sans-serif; /* ближче до макета */
-  font-size: clamp(22px, 6vw, 28px);
-  font-weight: 500;
-  line-height: 1.08;
-  letter-spacing: -0.5px;
-  color: #111;
-  margin: 0 0 1.4rem;
-  max-width: 240px;
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #080c0c;
+  text-align: center; 
+  margin: 0 auto 1.4rem;
+  max-width: 295px; 
 }
 
 /* Група поля */
@@ -82,19 +83,21 @@
 /* Інпути */
 .form-input,
 .form-textarea {
-  width: 100%;
+   width: 100%;
+
+  margin-top: 8px;
+  padding: 12px;
+
   box-sizing: border-box;
-  background: #eef4f3;
-  border: 1.5px solid #1f1f1f;
+
+  border: 2px solid #080c0c;
   border-radius: 12px;
-  padding: 10px 12px;
-  font-size: 13px;
-  color: #444;
-  outline: none;
-  font-family: 'Jost', sans-serif;
-  resize: none;
-  -webkit-appearance: none;
-  appearance: none;
+
+  background-color: transparent;
+
+  outline: transparent;
+
+  transition: border-color 250ms ease;
 }
 
 /* Placeholder */
@@ -117,7 +120,9 @@
 
 /* Textarea */
 .form-textarea {
-  height: 110px;
+  min-height: 140px;
+  resize: none;
+
 }
 
 /* Кнопка */
@@ -142,14 +147,37 @@
   background: #df7f7d;
 }
 
-/* Адаптив */
-@media (max-width: 400px) {
+
+@media only screen and (min-width: 768px) {
   .modal {
-    padding: 1.5rem 1rem 1.1rem;
-    border-radius: 16px;
+    max-width: 704px; 
+    padding: 64px 32px;
+  }
+
+  .form-textarea {
+    height: 180px; 
+  }
+
+  .btn-submit {
+    width: 344px; 
+    margin: 0 auto; 
+  }
+}
+
+
+@media only screen and (min-width: 1440px) {
+  .modal {
+    max-width: 768px; /* Розширення під великі монітори */
   }
 
   .modal-title {
-    font-size: 24px;
+    font-size: 48px; 
+  }
+
+  .btn-submit {
+    width: 196px;
+    height: 44px;
+    padding: 0; 
+    line-height: 44px;
   }
 }
