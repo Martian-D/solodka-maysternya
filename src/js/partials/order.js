@@ -83,7 +83,7 @@ export function openOrderModal(dessert) {
   document.body.style.overflow = 'hidden';
 
   // Focus first field for accessibility
-  nameInput.focus();
+  closeContactBtn?.focus();
 
   document.addEventListener('keydown', onEscapePress);
 }
