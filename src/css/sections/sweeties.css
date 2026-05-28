@@ -28,7 +28,7 @@
   --opacity-neutral-darkest-30: rgba(8, 12, 12, 0.3);
   --opacity-neutral-darkest-40: rgba(8, 12, 12, 0.4);
   --opacity-neutral-darkest-50: rgba(8, 12, 12, 0.5);
-  --opacity-neutral-darkest-60: rgba(8, 12, 12, 0.6);
+  --opacity-neutral-darkest-60: #080c0c99;
   --color-wewak-lightest: #fdf4f4;
   --color-wewak-lighter: #fceaea;
   --color-wewak-light: #f5b6b6;
