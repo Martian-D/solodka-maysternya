@@ -109,7 +109,8 @@ screen and (max-width: 767px) and (-webkit-min-device-pixel-ratio: 2) {
 @media screen and (min-width: 768px) and (max-width: 1439px) and (min-resolution: 2dppx),
 screen and (min-width: 768px) and (max-width: 1439px) and (-webkit-min-device-pixel-ratio: 2) {
     .hero-container {
-        background-image:
+      min-width: 768px;
+      background-image:
             linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
             url("/img/hero/hero-tablet-2x.png");
     }
