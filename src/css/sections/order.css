@@ -106,12 +106,9 @@
 /* Focus state — чорна рамка (як у дизайн-системі) */
 .form-input:focus,
 .form-textarea:focus {
-  border-color: #080c0c;
-}
-.form-input:hover,
-.form-textarea:hover {
   border-color: #f19898;
 }
+
 /* Error / invalid state — червона рамка (як у дизайн-системі) */
 .form-input.is-invalid,
 .form-textarea.is-invalid {
