@@ -12,6 +12,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  justify-content: center;
     background-image:
         linear-gradient(rgba(0, 0, 0, 0.5), rgba(43, 38, 38, 0.5)),
         url("/img/hero/hero-mob-1x.png");
@@ -70,7 +71,7 @@
 }
 
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 375px) {
     .hero-container {
         max-width: 375px;
     }
