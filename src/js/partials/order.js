@@ -15,52 +15,119 @@ const commentInput = document.getElementById('commentInput');
 
 // ── Field-level error helpers (match CSS: .is-invalid + .has-error on group) ──
 
-function setError(input, show) {
-  // Group id convention: group-name, group-phone, group-comment
-  const groupId = input.id.replace('Input', '');
-  const group   = document.getElementById('group-' + groupId);
+function showError(input, message) {
+  const group = input.closest('.form-group');
+  const errorText = group?.querySelector('.error-text');
 
-  if (show) {
-    input.classList.add('is-invalid');
-    group?.classList.add('has-error');
-  } else {
-    input.classList.remove('is-invalid');
-    group?.classList.remove('has-error');
+  input.classList.add('is-invalid');
+  input.classList.remove('is-valid');
+  input.setAttribute('aria-invalid', 'true');
+  group?.classList.add('has-error');
+
+  if (errorText) {
+    errorText.textContent = message;
+  }
+}
+
+function clearError(input) {
+  const group = input.closest('.form-group');
+  const errorText = group?.querySelector('.error-text');
+
+  input.classList.remove('is-invalid');
+  input.removeAttribute('aria-invalid');
+  group?.classList.remove('has-error');
+
+  if (errorText) {
+    errorText.textContent = '';
   }
 }
 
 function clearAllErrors() {
-  [nameInput, phoneInput, commentInput].forEach(el => setError(el, false));
+  [nameInput, phoneInput, commentInput].forEach(el => {
+    el.classList.remove('is-valid');
+    clearError(el);
+  });
 }
 
 // Clear error as soon as the user starts correcting a field
 [nameInput, phoneInput, commentInput].forEach(el => {
-  el.addEventListener('input', () => setError(el, false));
+  el.addEventListener('input', () => {
+    const value = el.value.trim();
+
+    if (value === '') {
+      el.classList.remove('is-valid');
+      clearError(el);
+      return;
+    }
+
+    if (el === nameInput) {
+      if (value.length >= 2 && value.length <= 48) {
+        clearError(el);
+        el.classList.add('is-valid');
+      } else {
+        el.classList.remove('is-valid');
+      }
+    }
+
+    if (el === phoneInput) {
+      if (validatePhone(value)) {
+        clearError(el);
+        el.classList.add('is-valid');
+      } else {
+        el.classList.remove('is-valid');
+      }
+    }
+
+    if (el === commentInput) {
+      if (value.length >= 2 && value.length <= 256) {
+        clearError(el);
+        el.classList.add('is-valid');
+      } else {
+        el.classList.remove('is-valid');
+      }
+    }
+  });
 });
+nameInput.addEventListener('blur', validate);
+phoneInput.addEventListener('blur', validate);
+commentInput.addEventListener('blur', validate);
 
 // ── Validation ────────────────────────────────────────────────────────────────
 
 function validatePhone(value) {
-  // Accepts: +380XXXXXXXXX | 380XXXXXXXXX | 0XXXXXXXXX  (spaces/dashes/parens ignored)
-  return /^(\+?38)?0\d{9}$/.test(value.replace(/[\s\-()+]/g, ''));
+  // Accepts Ukrainian numbers after normalization: 380XXXXXXXXX or 0XXXXXXXXX
+  return /^\d{12}$/.test(value.trim());
 }
 
 function validate() {
   let valid = true;
 
-  if (!nameInput.value.trim()) {
-    setError(nameInput, true);
+  const nameValue = nameInput.value.trim();
+  const phoneValue = phoneInput.value.trim();
+  const commentValue = commentInput.value.trim();
+
+  if (nameValue.length < 2 || nameValue.length > 48) {
+    showError(nameInput, "Ім'я повинно містити від 2 до 48 символів");
     valid = false;
+  } else {
+    nameInput.classList.add('is-valid');
+    clearError(nameInput);
   }
 
-  if (!validatePhone(phoneInput.value.trim())) {
-    setError(phoneInput, true);
+  if (!validatePhone(phoneValue)) {
+    showError(phoneInput, 'Номер телефону повинен містити 12 цифр');
     valid = false;
+  } else {
+    phoneInput.classList.add('is-valid');
+    clearError(phoneInput);
   }
 
-  if (!commentInput.value.trim()) {
-    setError(commentInput, true);
+  if (commentValue.length < 2 || commentValue.length > 256) {
+    showError(commentInput, 'Коментар повинен містити від 2 до 256 символів');
     valid = false;
+  } else {
+    commentInput.classList.add('is-valid');
+    clearError(commentInput);
   }
 
   return valid;

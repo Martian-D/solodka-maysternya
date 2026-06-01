@@ -30,7 +30,7 @@
             placeholder="Вікторія"
             autocomplete="given-name"
           />
-          <span class="error-text" id="error-name">Введіть ваше ім'я</span>
+          <span class="error-text visible" id="error-name">Ім'я повинно містити від 2 до 48 символів</span>
         </div>
 
         <div class="form-group" id="group-phone">
@@ -45,8 +45,8 @@
             placeholder="38 0__ ________"
             autocomplete="tel"
           />
-          <span class="error-text" id="error-phone"
-            >Введіть коректний номер телефону</span
+          <span class="error-text visible" id="error-phone"
+            >Номер телефону повинен містити 12 цифр</span
           >
         </div>
 
@@ -60,7 +60,7 @@
             name="comment"
             placeholder="Ваш коментар"
           ></textarea>
-          <span class="error-text" id="error-comment">Введіть коментар</span>
+          <span class="error-text visible" id="error-comment">Коментар повинен містити від 2 до 256 символів</span>
         </div>
 
         <button class="btn-submit" type="submit">Надіслати заявку</button>
