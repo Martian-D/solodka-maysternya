@@ -1,7 +1,7 @@
 :root {
   scroll-behavior: smooth;
 }
-  body {
+body {
   font-family: 'Work Sans', sans-serif;
   color: #080c0c;
   line-height: 1.5;
@@ -18,7 +18,8 @@ section {
 }
 
 h1,
-h2 {
+h2,
+h3 {
   font-family: 'Comfortaa', sans-serif;
 }
 
