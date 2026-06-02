@@ -17,13 +17,6 @@ Landing page / каталог для **Солодкої Майстерні**: а
 - Мобільне burger-меню з обробкою Escape і resize.
 - Production-збірка налаштована для деплою під `/team-dev/`.
 
-
-## Repository
-https://github.com/Anastasiia-S100306/team-dev
-
-## Pages
-https://anastasiia-s100306.github.io/team-dev/
-
 ## Технології
 
 - Vite
